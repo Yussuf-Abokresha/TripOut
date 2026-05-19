@@ -1,0 +1,98 @@
+{
+    "login_request_schema": {
+        "url": "<url>/api/v1/auth/login",
+        "method": "POST",
+        "identifier": "string",
+        "password": "string"
+    },
+    "login_response_schema": {
+        "access_token": "string",
+        "refresh_token": "string",
+        "profile_setup": "boolean"
+    },
+    "register_request_schema": {
+        "url": "<url>/api/v1/auth/register",
+        "method": "POST",
+        "identifier": "string",
+        "first_name": "string",
+        "last_name": "string",
+        "password": "string"
+    },
+    "register_response_schema": {
+        "otp_id": "string"
+    },
+    "verify_otp_request_schema": {
+        "url": "<url>/api/v1/auth/otp",
+        "method": "POST",
+        "otp_id": "string",
+        "otp_code": "string"
+    },
+    "verify_otp_response_schema": {
+        "access_token": "string",
+        "refresh_token": "string",
+        "profile_setup": "boolean"
+    },
+    "forget_password_request_schema": {
+        "url": "<url>/api/v1/auth/forget-password",
+        "method": "POST",
+        "identifier": "string",
+        "new_password": "string"
+    },
+    "forget_password_response_schema": {
+        "otp_id": "string"
+    },
+    "forget_password_verify_otp_request_schema": {
+        "url": "<url>/api/v1/auth/otp",
+        "method": "POST",
+        "otp_id": "string",
+        "otp_code": "string"
+    },
+    "forget_password_verify_otp_response_schema": {
+        "access_token": "string",
+        "refresh_token": "string",
+        "profile_setup": "boolean"
+    },
+    "profile_meta_data_request": {
+        "url": "<url>/api/v1/auth/profile/meta-data",
+        "method": "GET"
+    },
+    "profile_meta_data_response": {
+        "vibes": [
+            {
+                "id": "string",
+                "title": "string",
+                "image_url": "string",
+                "description": "string",
+                "icon_url": "string"
+            }
+        ],
+        "intersets": [
+            {
+                "id": "string",
+                "title": "string",
+                "icon_url": "string"
+            }
+        ],
+        "languages": [
+            {
+                "id": "string",
+                "title": "string",
+                "icon_url": "string"
+            }
+        ]
+    },
+    "create_profile_request_schema": {
+        "url": "<url>/api/v1/auth/profile",
+        "method": "POST",
+        "intersets": [
+            "string"
+        ],
+        "vibes": [
+            "string"
+        ],
+        "languages": [
+            "string"
+        ],
+        "bio": "string"
+    }
+}

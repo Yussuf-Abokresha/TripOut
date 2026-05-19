@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Users.Domain\Modules.Users.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\External\Modules.Users.Contracts\Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Notifications\src\External\Modules.Notifications.Contracts\Modules.Notifications.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

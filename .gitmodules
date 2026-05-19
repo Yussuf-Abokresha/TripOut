@@ -1,0 +1,9 @@
+[submodule "trpr.gateway"]
+	path = trpr.gateway
+	url = https://github.com/trpr-grad-project/trpr.gateway.git
+[submodule "trpr.backend"]
+	path = trpr.backend
+	url = https://github.com/trpr-grad-project/trpr.backend.git
+[submodule "trpr.identity"]
+	path = trpr.identity
+	url = https://github.com/trpr-grad-project/trpr.identity.git

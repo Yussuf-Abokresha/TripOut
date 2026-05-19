@@ -1,0 +1,152 @@
+version: '3.9'
+
+services:
+  trpr.database:
+    image: postgis/postgis:17-3.5
+    container_name: trpr.Database
+    environment:
+      - POSTGRES_DB=trpr
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./containers/postgresql/data/:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+    mem_limit: 256m
+    cpus: 0.25
+
+  # trpr.identity.database:
+  #   image: postgres
+  #   container_name: trpr.identity.database
+  #   environment:
+  #     - POSTGRES_DB=trpr_identity
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #     - ./containers/postgresql/identity_data/:/var/lib/postgresql/18/data
+  #   ports:
+  #     - "25433:5432"
+  #   mem_limit: 256m
+  #   cpus: 0.25
+
+  # trpr.identity:
+  #   build:
+  #     context: ./trpr.identity
+  #     dockerfile: Dockerfile
+  #   container_name: trpr.Identity
+  #   command: start-dev --import-realm
+  #   environment:
+  #     KEYCLOAK_LOGLEVEL: INFO
+  #     KEYCLOAK_LOGLEVEL_HIBERNATE: INFO
+  #     KEYCLOAK_ADMIN: admin
+  #     KEYCLOAK_ADMIN_PASSWORD: admin
+  #     KC_DB: postgres
+  #     KC_DB_URL: jdbc:postgresql://trpr.identity.database:5432/trpr_identity?currentSchema=public
+  #     KC_DB_USERNAME: postgres
+  #     KC_DB_PASSWORD: postgres
+  #     KC_HEALTH_ENABLED: "true"
+  #     KC_METRICS_ENABLED: "true"
+  #   depends_on:
+  #     - trpr.database
+  #   volumes:
+  #     - ./containers/keycloak/data:/opt/keycloak/data
+  #     - ./files:/opt/keycloak/data/import
+  #   ports:
+  #     - 18080:8080
+  #     - 19000:9000
+  #   mem_limit: 1g
+  #   cpus: 1.0
+
+  # trpr.gateway:
+  #   build:
+  #     context: ./trpr.gateway
+  #     dockerfile: Dockerfile
+  #   container_name: trpr.gateway
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "5000:8080"
+
+  trpr.backend:
+    build:
+      context: ./trpr.backend
+      dockerfile: Dockerfile
+    container_name: trpr.backend
+    env_file:
+      - .env
+    ports:
+      - "5001:8080"
+  # trpr.rabbitmq:
+  #   image: rabbitmq:3.13-management
+  #   container_name: trpr.rabbitmq
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=guest
+  #     - RABBITMQ_DEFAULT_PASS=guest
+  #   ports:
+  #     - "5672:5672" # AMQP
+  #     - "15672:15672" # Management UI
+  #   volumes:
+  #     - ./containers/rabbitmq/data:/var/lib/rabbitmq
+  #   mem_limit: 256m
+  #   cpus: 0.25
+
+  # trpr.pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   container_name: trpr.pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@trpr.local
+  #     PGADMIN_DEFAULT_PASSWORD: admin
+  #     PGADMIN_CONFIG_SERVER_MODE: "True"
+  #   volumes:
+  #     - ./containers/pgadmin/data:/var/lib/pgadmin
+  #   ports:
+  #     - "5050:80"
+  #   depends_on:
+  #     - trpr.database
+  #     - trpr.identity.database
+  #   mem_limit: 256m
+  #   cpus: 0.25
+  trpr.minio:
+    image: minio/minio:latest
+    container_name: trpr.minio
+    ports:
+      - "9000:9000" # API
+      - "9001:9001" # Web Console
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    volumes:
+      - ./containers/minio/data:/data
+    command: server /data --console-address ":9001"
+  # build-car:
+  #   image: osrm/osrm-backend
+  #   volumes:
+  #     - ./routing-engine:/data
+  #   working_dir: /data
+  #   entrypoint: [ "/bin/bash", "-c" ]
+  #   command: "./build-car.sh"
+  #   restart: "no"
+  # build-foot:
+  #   image: osrm/osrm-backend
+  #   volumes:
+  #     - ./routing-engine:/data
+  #   working_dir: /data
+  #   entrypoint: [ "/bin/bash", "-c" ]
+  #   command: "./build-foot.sh"
+  #   restart: "no"
+  # osrm-car:
+  #   image: osrm/osrm-backend
+  #   container_name: osrm-car
+  #   volumes:
+  #     - ./routing-engine/car:/data
+  #   ports:
+  #     - "5000:5000"
+  #   command: osrm-routed --algorithm mld /data/egypt-latest.osrm
+  # osrm-foot:
+  #   image: osrm/osrm-backend
+  #   container_name: osrm-foot
+  #   volumes:
+  #     - ./routing-engine/foot:/data
+  #   ports:
+  #     - "5001:5000"
+  #   command: osrm-routed --algorithm mld /data/egypt-latest.osrm

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Modules.Users.Application\Modules.Users.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Common\Common.Presentation\Common.Presentation.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Modules.Users.Presentation</RootNamespace>
+  </PropertyGroup>
+</Project>

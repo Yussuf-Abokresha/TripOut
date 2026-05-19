@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Conversations.Domain\Modules.Conversations.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\External\Modules.Conversations.Contracts\Modules.Conversations.Contracts.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

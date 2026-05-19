@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Trips.Domain\Modules.Trips.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\External\Modules.Trips.Contracts\Modules.Trips.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Notifications\src\External\Modules.Notifications.Contracts\Modules.Notifications.Contracts.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
