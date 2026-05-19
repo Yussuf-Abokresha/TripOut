@@ -1,7 +1,8 @@
-# Trpr
+# Trip Planner and Outing Platform | TripOut
 
+## This project introduces an intelligent trip planning and guidance system that aims to unify planning and exploration into a single interactive platform.
 
-`Trpr` is a modern modular monolith built with ASP.NET Core that powers travel, chat, notifications, and user services in a single deployable backend.
+`TripOut` is a modern modular monolith built with ASP.NET Core that powers travel, chat, notifications, and user services in a single deployable backend.
 
 It follows Clean Architecture principles with separated `Common` and module-specific layers, and it is container-ready with Docker and PostgreSQL.
 
